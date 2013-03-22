@@ -10,7 +10,7 @@ import pl.edu.pk.ztp.dekorator.ingredients.Broccoli;
 import pl.edu.pk.ztp.dekorator.ingredients.Chicken;
 import pl.edu.pk.ztp.dekorator.ingredients.Spinach;
 import pl.edu.pk.ztp.dekorator.pizzas.CustomPizza;
-import pl.edu.pk.ztp.dekorator.pizzas.MeatPizza;
+import pl.edu.pk.ztp.dekorator.pizzas.Haarmann;
 import pl.edu.pk.ztp.dekorator.pizzas.Vegetariana;
 import pl.edu.pk.ztp.dekorator.receipts.Receipt;
 import pl.edu.pk.ztp.dekorator.receipts.ReceiptMaker;
@@ -52,7 +52,7 @@ public class ReceiptMakerTest {
     @Test
     public void customPizzaWithTheSameIngredientsAsVegetarianaShouldCostSame() throws Exception {
         // given
-        final CustomPizza fakeVege = CustomPizza.Builder.withBase(new MeatPizza())
+        final CustomPizza fakeVege = CustomPizza.Builder.withBase(new Haarmann())
                 .without(new Bacon()).without(new Chicken()).with(new Broccoli())
                 .with(new Spinach()).build();
         final Vegetariana realVege = new Vegetariana();
@@ -67,11 +67,11 @@ public class ReceiptMakerTest {
     public void shouldMakeAReceiptForTwoPizzas() throws Exception {
         // given
         final Vegetariana vegetariana = new Vegetariana();
-        final MeatPizza meatPizza = new MeatPizza();
+        final Haarmann haarmann = new Haarmann();
         // when
-        final Receipt receipt = testSubject.receiptFor(vegetariana, meatPizza);
+        final Receipt receipt = testSubject.receiptFor(vegetariana, haarmann);
         final Receipt vegeOnly = testSubject.receiptFor(vegetariana);
-        final Receipt meatOnly = testSubject.receiptFor(meatPizza);
+        final Receipt meatOnly = testSubject.receiptFor(haarmann);
         // then
         assertThat(receipt.getAmount())
                 .isEqualByComparingTo(vegeOnly.getAmount().add(meatOnly.getAmount()));

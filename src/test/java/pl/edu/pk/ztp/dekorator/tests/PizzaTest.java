@@ -10,7 +10,7 @@ import pl.edu.pk.ztp.dekorator.ingredients.Broccoli;
 import pl.edu.pk.ztp.dekorator.ingredients.Chicken;
 import pl.edu.pk.ztp.dekorator.ingredients.Spinach;
 import pl.edu.pk.ztp.dekorator.pizzas.CustomPizza;
-import pl.edu.pk.ztp.dekorator.pizzas.MeatPizza;
+import pl.edu.pk.ztp.dekorator.pizzas.Haarmann;
 import pl.edu.pk.ztp.dekorator.pizzas.Pizza;
 import pl.edu.pk.ztp.dekorator.pizzas.Vegetariana;
 
@@ -30,7 +30,7 @@ public class PizzaTest {
     @Test
     public void clientGetsMeatPizza() throws Exception {
         // given
-        Pizza pizza = new MeatPizza();
+        Pizza pizza = new Haarmann();
         // then
         assertThat(pizza.getIngredients()).containsOnly(new Bacon(), new Chicken());
         assertThat(pizza.hasMeat()).isTrue();
@@ -49,7 +49,7 @@ public class PizzaTest {
     @Test
     public void clientShouldBeAbleToBuildCustomPizzaWithoutMeat() throws Exception {
         // when
-        final CustomPizza broccoliPizza = CustomPizza.Builder.withBase(new MeatPizza())
+        final CustomPizza broccoliPizza = CustomPizza.Builder.withBase(new Haarmann())
                 .without(new Bacon()).without(new Chicken()).with(new Broccoli()).build();
         // when
         assertThat(broccoliPizza.getIngredients()).containsOnly(new Broccoli());
@@ -58,13 +58,13 @@ public class PizzaTest {
 
     @Test(expected = StupidClientException.class)
     public void clientShouldNotBeAbleToOrderPizzaWithAndWithoutSameThing() throws Exception {
-        CustomPizza.Builder.withBase(new MeatPizza()).with(new Broccoli()).without(new Broccoli());
+        CustomPizza.Builder.withBase(new Haarmann()).with(new Broccoli()).without(new Broccoli());
     }
 
     @Test
     public void shouldPermitDoubleBacon() throws Exception {
         // when
-        final CustomPizza doubleBacon = CustomPizza.Builder.withBase(new MeatPizza())
+        final CustomPizza doubleBacon = CustomPizza.Builder.withBase(new Haarmann())
                 .with(new Bacon()).build();
         // then
         assertHasTwoBacons(doubleBacon);

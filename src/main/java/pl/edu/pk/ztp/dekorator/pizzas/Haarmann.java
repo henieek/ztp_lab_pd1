@@ -9,7 +9,7 @@ import pl.edu.pk.ztp.dekorator.ingredients.Bacon;
 import pl.edu.pk.ztp.dekorator.ingredients.Chicken;
 import pl.edu.pk.ztp.dekorator.ingredients.Ingredient;
 
-public class MeatPizza implements Pizza {
+public class Haarmann implements Pizza {
 
     private final List<Ingredient> ingredients = ImmutableList.of(new Bacon(), new Chicken());
 
